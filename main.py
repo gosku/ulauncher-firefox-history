@@ -23,13 +23,16 @@ class PreferencesEventListener(EventListener):
         extension.fh.aggregate = event.preferences['aggregate']
         #   Results Order
         extension.fh.order = event.preferences['order']
+        #   Firefox Profile Location
+        extension.fh.firefox_profile_location = event.preferences['firefox_profile_location']
+        extension.fh.establish_connection()
         #   Results Number
         try:
             n = int(event.preferences['limit'])
         except:
             n = 10
         extension.fh.limit = n
-        
+
 class PreferencesUpdateEventListener(EventListener):
     def on_event(self,event,extension):
         #   Results Order
@@ -44,6 +47,9 @@ class PreferencesUpdateEventListener(EventListener):
                 pass
         elif event.id == 'aggregate':
             extension.fh.aggregate = event.new_value
+        elif event.id == 'firefox_profile_location':
+            extension.fh.firefox_profile_location = event.new_value
+            extension.fh.establish_connection()
 
 class SystemExitEventListener(EventListener):
     def on_event(self,event,extension):
@@ -59,7 +65,7 @@ class KeywordQueryEventListener(EventListener):
         #   Search into Firefox History
         results = extension.fh.search(query)
         for link in results:
-            #   Encode 
+            #   Encode
             hostname = link[0]
             #   Split Domain Levels
             dm = hostname.split('.')

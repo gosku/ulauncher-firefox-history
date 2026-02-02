@@ -34,14 +34,19 @@
           {"value":"visit","text":"Visit Count"},
           {"value":"recent","text":"Last Visit"}
           ]
-      },  
+      },
       {
         "id": "limit",
         "type": "input",
         "name": "Results number",
         "default_value": "5"
+      },
+      {
+        "id": "firefox_profile_location",
+        "type": "text",
+        "name": "Firefox Profile Location",
+        "default_value": "snap/firefox/common/.mozilla/firefox/, .mozilla/firefox/, .config/mozilla/firefox/"
       }
 
     ]
   }
-  

@@ -42,6 +42,12 @@
         "default_value": "5"
       },
       {
+        "id": "firefox_profile_location",
+        "type": "text",
+        "name": "Firefox Profile Location",
+        "default_value": "snap/firefox/common/.mozilla/firefox/, .mozilla/firefox/, .config/mozilla/firefox/"
+      },
+      {
         "id": "bookmarks_only",
         "type": "select",
         "name": "Search only in bookmarks",
@@ -51,6 +57,5 @@
           {"value":"false","text":"No"}
         ]
       }
-
     ]
   }

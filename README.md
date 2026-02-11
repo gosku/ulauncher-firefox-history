@@ -19,6 +19,10 @@ The **number of results** and the **popularity criteria** can be changed in the 
 
 Search results can be filtered to show **bookmarks only**.
 
+The extension also allows configuring the **Firefox Profile Location**.
+Since different OSs and package managers (like Snap or Flatpak) might store Firefox profiles in different places,
+you can provide a comma-separated list of paths to search for `profiles.ini`. The extension will use the first valid path found.
+
 ## Install
 > https://github.com/rmassidda/ulauncher-firefox-history
 

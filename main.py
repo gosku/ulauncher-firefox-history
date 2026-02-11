@@ -23,6 +23,10 @@ class PreferencesEventListener(EventListener):
         extension.fh.aggregate = event.preferences['aggregate']
         #   Results Order
         extension.fh.order = event.preferences['order']
+        #   Firefox Profile Location
+        extension.fh.firefox_profile_location = event.preferences['firefox_profile_location']
+        #   Update connection
+        extension.fh.establish_connection()
         #   Results Number
         try:
             n = int(event.preferences['limit'])
@@ -46,6 +50,9 @@ class PreferencesUpdateEventListener(EventListener):
                 pass
         elif event.id == 'aggregate':
             extension.fh.aggregate = event.new_value
+        elif event.id == 'firefox_profile_location':
+            extension.fh.firefox_profile_location = event.new_value
+            extension.fh.establish_connection()
         elif event.id == 'bookmarks_only':
             extension.fh.bookmarks_only = event.new_value
 

@@ -25,6 +25,7 @@ class PreferencesEventListener(EventListener):
         extension.fh.order = event.preferences['order']
         #   Firefox Profile Location
         extension.fh.firefox_profile_location = event.preferences['firefox_profile_location']
+        #   Update connection
         extension.fh.establish_connection()
         #   Results Number
         try:
@@ -32,6 +33,8 @@ class PreferencesEventListener(EventListener):
         except:
             n = 10
         extension.fh.limit = n
+        #   Bookmarks only
+        extension.fh.bookmarks_only = event.preferences['bookmarks_only']
 
 class PreferencesUpdateEventListener(EventListener):
     def on_event(self,event,extension):
@@ -50,6 +53,8 @@ class PreferencesUpdateEventListener(EventListener):
         elif event.id == 'firefox_profile_location':
             extension.fh.firefox_profile_location = event.new_value
             extension.fh.establish_connection()
+        elif event.id == 'bookmarks_only':
+            extension.fh.bookmarks_only = event.new_value
 
 class SystemExitEventListener(EventListener):
     def on_event(self,event,extension):

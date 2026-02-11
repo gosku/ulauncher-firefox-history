@@ -46,7 +46,16 @@
         "type": "text",
         "name": "Firefox Profile Location",
         "default_value": "snap/firefox/common/.mozilla/firefox/, .mozilla/firefox/, .config/mozilla/firefox/"
+      },
+      {
+        "id": "bookmarks_only",
+        "type": "select",
+        "name": "Search only in bookmarks",
+        "default_value": "false",
+        "options":[
+          {"value":"true","text":"Yes"},
+          {"value":"false","text":"No"}
+        ]
       }
-
     ]
   }

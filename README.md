@@ -3,7 +3,7 @@
 ### [Ulauncher](https://ulauncher.io) extension for quickly accessing already visited websites.
 
 ## Use
-> fh 
+> fh
 
 List the five most popular websites in Firefox history.
 
@@ -17,7 +17,11 @@ The search results can be **aggregated by hostname**, so that visiting _twitter.
 
 The **number of results** and the **popularity criteria** can be changed in the extension's settings. The popularity can be determined by last visit date, visit count or [Firefox Frecency](https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Frecency_algorithm) heuristic.
 
-The extension also allows configuring the **Firefox Profile Location**. Since different OSs and package managers (like Snap or Flatpak) might store Firefox profiles in different places, you can provide a comma-separated list of paths to search for `profiles.ini`. The extension will use the first valid path found.
+Search results can be filtered to show **bookmarks only**.
+
+The extension also allows configuring the **Firefox Profile Location**.
+Since different OSs and package managers (like Snap or Flatpak) might store Firefox profiles in different places,
+you can provide a comma-separated list of paths to search for `profiles.ini`. The extension will use the first valid path found.
 
 ## Install
 > https://github.com/rmassidda/ulauncher-firefox-history

@@ -16,8 +16,15 @@ class FirefoxHistory():
         self.order = None
         #   Results number
         self.limit = None
+        #   Bookmarks only
+        self.bookmarks_only = None
+        #   Connection to sqlite3 parameters
         self.firefox_profile_location = None
         self.conn = None
+        #   Default connection
+        self.
+        
+        _connection()
 
     def establish_connection(self):
         if self.conn:
@@ -85,19 +92,24 @@ class FirefoxHistory():
     def search(self,query_str):
         #   Aggregate URLs by hostname
         if self.aggregate == "true":
-            query = 'SELECT hostname(url)'
+            query = 'SELECT hostname(moz_places.url)'
         else:
-            query = 'SELECT DISTINCT url'
-        query += ',title FROM moz_places WHERE'
+            query = 'SELECT DISTINCT moz_places.url'
+        query += ',moz_places.title FROM moz_places'
+
+        if self.bookmarks_only == "true":
+            query += ' JOIN moz_bookmarks ON moz_places.id = moz_bookmarks.fk'
+
+        query += ' WHERE'
         #   Search terms
         terms = query_str.split(' ')
         for term in terms:
-            query += ' ((url LIKE "%%%s%%") OR (title LIKE "%%%s%%")) AND' % (term,term)
+            query += ' ((moz_places.url LIKE "%%%s%%") OR (moz_places.title LIKE "%%%s%%")) AND' % (term,term)
         #   Delete last AND
         query = query[:-4]
 
         if self.aggregate == "true":
-            query += ' GROUP BY hostname(url) ORDER BY '
+            query += ' GROUP BY hostname(moz_places.url) ORDER BY '
             #   Firefox Frecency
             if self.order == 'frecency':
                 query += 'sum(frecency)'
@@ -109,7 +121,7 @@ class FirefoxHistory():
                 query += 'max(last_visit_date)'
             #   Not sorted
             else:
-                query += 'hostname(url)'
+                query += 'hostname(moz_places.url)'
         else:
             query += ' ORDER BY '
             #   Firefox Frecency
@@ -123,7 +135,7 @@ class FirefoxHistory():
                 query += 'last_visit_date'
             #   Not sorted
             else:
-                query += 'url'
+                query += 'moz_places.url'
 
         query += ' DESC LIMIT %d' % self.limit
 
@@ -138,4 +150,5 @@ class FirefoxHistory():
         return rows
 
     def close(self):
-        self.conn.close()
+        if self.conn:
+            self.conn.close()

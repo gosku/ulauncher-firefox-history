@@ -21,10 +21,6 @@ class FirefoxHistory():
         #   Connection to sqlite3 parameters
         self.firefox_profile_location = None
         self.conn = None
-        #   Default connection
-        self.
-        
-        _connection()
 
     def establish_connection(self):
         if self.conn:
